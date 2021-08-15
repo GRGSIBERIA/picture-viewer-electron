@@ -10,7 +10,7 @@
     order:-1;
 }
 
-input[name="main-tab"] {
+input[name="navigation-tab"] {
     display: none;
 }
 
@@ -30,11 +30,11 @@ input:checked + .tab-class {
          0px -2px 1px #000000;        /* 文字の影 */
 }
 
-.main-content {
+.navigation-content {
     display: none;
     width: 100%;
 }
 
-input:checked + .tab-class + .main-content {
+input:checked + .tab-class + .navigation-content {
     display: block;
 }
