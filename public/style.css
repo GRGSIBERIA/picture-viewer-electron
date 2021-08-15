@@ -38,3 +38,10 @@ input:checked + .tab-class {
 input:checked + .tab-class + .navigation-content {
     display: block;
 }
+
+#navigation-area {
+    width: 100%;
+    margin: auto;
+    flex-wrap: wrap;
+    display: flex;
+}
