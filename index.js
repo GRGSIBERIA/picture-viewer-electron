@@ -1,13 +1,26 @@
 'use strict';
 
-// Electronのモジュール
-const electron = require("electron");
+const {app, Menu, BrowserWindow} = require("electron");
 
-// アプリケーションをコントロールするモジュール
-const app = electron.app;
-
-// ウィンドウを作成するモジュール
-const BrowserWindow = electron.BrowserWindow;
+const template = Menu.buildFromTemplate([
+    {
+        label: "ファイル",
+        submenu: [
+            { id: "close-window", label: "閉じる"}
+        ]
+    },
+    {
+        label: "表示",
+        submenu: [
+            { id: "import-tab", label: "読み込み"},
+            { id: "search-tab", label: "検索"},
+            { id: "view-tab", label: "閲覧"},
+            { id: "collage-tab", label: "コラージュ"},
+            //{ type: "separator"}
+        ]
+    }
+]);
+Menu.setApplicationMenu(template);
 
 // メインウィンドウはGCされないようにグローバル宣言
 let mainWindow;
