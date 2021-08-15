@@ -1,0 +1,40 @@
+.tab-class {
+    width: calc(100%/5);
+    height: 3rem;
+    background-color: darkgray;
+    line-height: 3rem;
+    font-size: 12pt;
+    text-align: center;
+    display: block;
+    float: left;
+    order:-1;
+}
+
+input[name="main-tab"] {
+    display: none;
+}
+
+input:checked + .tab-class {
+    background-color: cadetblue;
+    color: aliceblue;
+
+    letter-spacing : 4px;                /* 文字間 */
+    text-shadow    : 
+         2px  2px 1px #000000,
+        -2px  2px 1px #000000,
+         2px -2px 1px #000000,
+        -2px -2px 1px #000000,
+         2px  0px 1px #000000,
+         0px  2px 1px #000000,
+        -2px  0px 1px #000000,
+         0px -2px 1px #000000;        /* 文字の影 */
+}
+
+.main-content {
+    display: none;
+    width: 100%;
+}
+
+input:checked + .tab-class + .main-content {
+    display: block;
+}
