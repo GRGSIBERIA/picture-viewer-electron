@@ -45,3 +45,58 @@ input:checked + .tab-class + .navigation-content {
     flex-wrap: wrap;
     display: flex;
 }
+
+/**
+ * 下線付きのテキストボックス用マークアップ
+ */
+.cp-iptext {
+    position: relative;
+    width: 80%;
+    margin: 40px 3%;
+}
+.cp-iptext input[type="text"] {
+    font: 15px/24px sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    letter-spacing: 1px;
+    padding-left: 4em;
+}
+.cp-iptext input[type="text"]:focus {
+    outline: none;
+}
+.effect-input {
+    padding: 4px 0;
+    border: 0;
+    border-bottom: 1px solid #1b2538;
+    background-color: transparent;
+}
+.effect-input ~ .focus-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: 0.4s;
+    background-color: #C41A41;
+}
+.effect-input:focus ~ .focus-line,
+.cp-iptext.effect-input ~ .focus-line {
+    width: 100%;
+    transition: 0.4s;
+}
+.effect-input ~ label {
+    position: absolute;
+    z-index: -1;
+    top: 4px;
+    left: 0;
+    width: 100%;
+    transition: 0.3s;
+    letter-spacing: 0.5px;
+    color: #aaaaaa;
+}
+.effect-input:focus ~ label, .cp-iptext.effect-input ~ label {
+    font-size: 12px;
+    top: -16px;
+    transition: 0.3s;
+    color: #C41A41;
+}
