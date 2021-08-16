@@ -2,9 +2,44 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Sample</title>
+    <title>Picture Viewer</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <p>Hello World</p>
+    <section id="navigation-area">
+        <input type="radio" name="navigation-tab" id="import-tab" checked/>
+        <label class="tab-class" for="import-tab">読み込み</label>
+        <div id="import-tab-contents" class="navigation-content">
+            <div class="cp-iptext">
+                <input type="text" placeholder="" class="effect-input"/>
+                <label>読み込みディレクトリ</label>
+                <span class="focus-line"></span>
+            </div>
+        </div>
+
+        <input type="radio" name="navigation-tab" id="search-tab"/>
+        <label class="tab-class" for="search-tab">検索</label>
+        <div id="search-tab-contents" class="navigation-content">
+            <div class="cp-iptext">
+                <input type="text" placeholder="" class="effect-input"/>
+                <label>検索キーワード</label>
+                <span class="focus-line"></span>
+            </div>
+        </div>
+
+        <input type="radio" name="navigation-tab" id="view-tab" />
+        <label class="tab-class" for="view-tab">閲覧</label>
+        <div id="view-tab-contents" class="navigation-content">
+            view tab
+        </div>
+
+        <input type="radio" name="navigation-tab" id="collage-tab" />
+        <label class="tab-class" for="collage-tab">コラージュ</label>
+        <div id="collage-tab-content" class="navigation-content">
+            collage tab
+        </div>
+
+        
+    </section>
 </body>
 </html>
