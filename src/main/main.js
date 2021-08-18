@@ -1,6 +1,7 @@
 'use strict';
 
-const {app, Menu, BrowserWindow} = require("electron");
+const {app, Menu, BrowserWindow, ipcMain} = require("electron");
+const path = require("path");
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -28,10 +29,18 @@ Menu.setApplicationMenu(template);
 let mainWindow;
 
 function createMainWindow() {
-    const window = new BrowserWindow({webPreferences: {nodeIntegration: true}});
+    const window = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: true,
+            preload: path.join(__dirname, "preload.js")
+        },
+        width: 800,
+        height: 600
+    });
 
     if (isDevelopment) {
-        //window.webContents.openDevTools();
+        window.webContents.openDevTools();
     }
   
     if (isDevelopment) {
@@ -77,4 +86,8 @@ app.on('activate', () => {
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
     mainWindow = createMainWindow()
+});
+
+ipcMain.handle("require", (event, component) => {
+    return require(component);
 });
