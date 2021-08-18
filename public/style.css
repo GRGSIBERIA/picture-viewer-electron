@@ -101,7 +101,10 @@ input:checked + .tab-class + .navigation-content {
     color: #C41A41;
 }
 
-.btn, a.btn, button.btn {
+/**
+ * ボタンのマークアップ
+ */
+.btn, a.btn, button.btn, input[type="button"] {
     line-height: 1.5;
     position: relative;
     display: inline-block;
@@ -119,6 +122,14 @@ input:checked + .tab-class + .navigation-content {
     letter-spacing: 0.1em;
     color: #212529;
     border-radius: 0.5rem;
+}
+.btn--primary, a.btn--primary {
+    color: aliceblue;
+    background-color: cadetblue;
+}
+.btn--primary:hover, a.btn--primary:hover {
+    color: aliceblue;
+    background-color: cadetblue;
 
     letter-spacing : 4px;                /* 文字間 */
     text-shadow    : 
@@ -130,12 +141,4 @@ input:checked + .tab-class + .navigation-content {
          0px  2px 1px #000000,
         -2px  0px 1px #000000,
          0px -2px 1px #000000;        /* 文字の影 */
-}
-.btn--primary, a.btn--primary {
-    color: aliceblue;
-    background-color: cadetblue;
-}
-.btn--primary:hover, a.btn--primary:hover {
-    color: aliceblue;
-    background-color: cadetblue;
 }
