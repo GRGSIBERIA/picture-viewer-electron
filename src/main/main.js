@@ -43,7 +43,7 @@ app.on('ready', function() {
                 webSecurity: false
             }
         });
-    mainWindow.loadURL('file://' + __dirname + '/public/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/static/index.html');
 
     // ウィンドウが閉じられたらアプリも終了
     mainWindow.on('closed', function() {

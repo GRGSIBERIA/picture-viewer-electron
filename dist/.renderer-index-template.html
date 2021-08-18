@@ -1,47 +1,9 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Picture Viewer</title>
-    <link rel="stylesheet" href="dist/style.css" />
-    <script src="dist/index.js"></script>
-<title>picture-viewer-electron</title><script>require('module').globalPaths.push("C:/Users/EIICHI/Documents/GitHub/picture-viewer-electron/node_modules")</script><script>require("source-map-support/source-map-support.js").install()</script></head>
-<body>
-    <section id="navigation-area">
-        <input type="radio" name="navigation-tab" id="import-tab" checked/>
-        <label class="tab-class" for="import-tab">読み込み</label>
-        <div id="import-tab-contents" class="navigation-content">
-            <div class="cp-iptext">
-                <input type="text" placeholder="" class="effect-input" id="import-directory"/>
-                <label>読み込みディレクトリ</label>
-                <span class="focus-line"></span>
-            </div>
-            <input type="button" class="btn btn--primary" name="import-button" value="読み込み実行" id="import-button">
-        </div>
-
-        <input type="radio" name="navigation-tab" id="search-tab"/>
-        <label class="tab-class" for="search-tab">検索</label>
-        <div id="search-tab-contents" class="navigation-content">
-            <div class="cp-iptext">
-                <input type="text" placeholder="" class="effect-input"/>
-                <label>検索キーワード</label>
-                <span class="focus-line"></span>
-            </div>
-        </div>
-
-        <input type="radio" name="navigation-tab" id="view-tab" />
-        <label class="tab-class" for="view-tab">閲覧</label>
-        <div id="view-tab-contents" class="navigation-content">
-            view tab
-        </div>
-
-        <input type="radio" name="navigation-tab" id="collage-tab" />
-        <label class="tab-class" for="collage-tab">コラージュ</label>
-        <div id="collage-tab-content" class="navigation-content">
-            collage tab
-        </div>
-
-        
-    </section>
-</body>
-</html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+      <title>picture-viewer-electron</title><script>require('module').globalPaths.push("C:/Users/EIICHI/Documents/GitHub/picture-viewer-electron/node_modules")</script><script>require("source-map-support/source-map-support.js").install()</script></head>
+      <body>
+        <div id="app"></div>
+      </body>
+    </html>
