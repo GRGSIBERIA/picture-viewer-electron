@@ -3,36 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Picture Viewer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../renderer/style.css">
     <script src="../renderer/index.js"></script>
 </head>
 <body>
     <div class="tabs">
-        <input id="import-tab" type="radio" name="tab-item" checked>
-        <label class="tab-item" for="import-tab">IMPORT</label>
-
-        <input id="search-tab" type="radio" name="tab-item">
-        <label class="tab-item" for="search-tab">SEARCH</label>
-
-        <input id="picture-tab" type="radio" name="tab-item">
-        <label class="tab-item" for="picture-tab">PICTURE</label>
-
-        <input id="collage-tab" type="radio" name="tab-item">
-        <label class="tab-item" for="collage-tab">COLLAGE</label>
-
-        <div class="tab-content" id="import-content">
-            <input type="button" id="import-button" value="Start Import">
+        <input type="radio" name="tab-item" id="tab-import" checked>
+        <label class="tab_class" for="tab-import">読み込み</label>
+        <div class="tab-content">
+            <p>タブ1のコンテンツを表示します</p>
         </div>
-
-        <div class="tab-content" id="search-content">
+        <input type="radio" name="tab-item" id="tab-search" >
+        <label class="tab_class" for="tab-search">検索</label>
+        <div class="tab-content">
+            <p>タブ2のコンテンツを表示します</p>
         </div>
-
-        <div class="tab-content" id="picture-content">
+        <input type="radio" name="tab-item" id="tab-picture" >
+        <label class="tab_class" for="tab-picture">閲覧</label>
+        <div class="tab-content">
+            <p>タブ3のコンテンツを表示します</p>
         </div>
-
-        <div class="tab-content" id="collage-tab">
+        <input type="radio" name="tab-item" id="tab-collage" >
+        <label class="tab_class" for="tab-collage">コラージュ</label>
+        <div class="tab-content">
+            <p>タブ4のコンテンツを表示します</p>
         </div>
-    </div>
+      </div>
 </body>
 </html>

@@ -1,56 +1,36 @@
-/*タブ切り替え全体のスタイル*/
 .tabs {
-    margin-top: 50px;
-    padding-bottom: 40px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 700px;
-    margin: 0 auto;}
-  
-  /*タブのスタイル*/
-  .tab-item {
-    width: calc(100%/4);
-    height: 50px;
-    border-bottom: 3px solid #5ab4bd;
-    background-color: #d9d9d9;
-    line-height: 50px;
-    font-size: 16px;
-    text-align: center;
-    color: #565656;
-    display: block;
-    float: left;
-    text-align: center;
-    font-weight: bold;
-    transition: all 0.2s ease;
-  }
-  .tab-item:hover {
-    opacity: 0.75;
-  }
-  
-  /*ラジオボタンを全て消す*/
-  input[name="tab-item"] {
-    display: none;
-  }
-  
-  /*タブ切り替えの中身のスタイル*/
-  .tab-content {
-    display: none;
-    padding: 40px 40px 0;
-    clear: both;
-    overflow: hidden;
-  }
-  
-  
-  /*選択されているタブのコンテンツのみを表示*/
-  #import:checked ~ #import-content,
-  #search:checked ~ #search-content,
-  #picture:checked ~ #picture-content,
-  #collage:checked ~ #collage-content {
-    display: block;
-  }
-  
-  /*選択されているタブのスタイルを変える*/
-  .tabs input:checked + .tab-item {
-    background-color: #5ab4bd;
-    color: #fff;
-  }
+  width: 100%;
+  margin: auto;
+  flex-wrap: wrap;
+  display: flex;
+}
+ 
+.tab_class {
+  width: calc(100%/4);
+  height: 50px;
+  background-color: darkgrey;
+  line-height: 50px;
+  font-size: 15px;
+  text-align: center;
+  display: block;
+  float: left;
+  order: -1;
+}
+ 
+input[name="tab-item"] {
+  display: none;
+}
+ 
+input:checked + .tab_class {
+  background-color: cadetblue;
+  color: aliceblue;
+}
+ 
+.tab-content {
+  display: none;
+  width: 100%;
+}
+ 
+input:checked + .tab_class + .tab-content {
+  display: block;
+}
