@@ -1,0 +1,51 @@
+{
+  "name": "picture-viewer-electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GRGSIBERIA/picture-viewer-electron.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GRGSIBERIA/picture-viewer-electron/issues"
+  },
+  "homepage": "https://github.com/GRGSIBERIA/picture-viewer-electron#readme",
+  "devDependencies": {
+    "devtron": "^1.4.0",
+    "electron": "^13.1.9",
+    "electron-builder": "^22.12.0",
+    "electron-webpack": "^2.8.2",
+    "webpack": "^4.46.0"
+  },
+  "dependencies": {
+    "glob": "^7.1.7",
+    "nedb": "^1.8.0",
+    "source-map-support": "^0.5.19"
+  },
+  "electronWebpack": {
+    "commonSourceDirectory": "src/common",
+    "staticSourceDirectory": "src/static",
+    "title": true,
+    "whiteListedModules": [
+      "foo-ui-library"
+    ],
+    "main": {
+      "sourceDirectory": "src/main"
+    },
+    "renderer": {
+      "sourceDirectory": "src/renderer",
+      "template": "src/renderer/index.html"
+    }
+  }
+}

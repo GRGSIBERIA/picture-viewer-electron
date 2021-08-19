@@ -1,0 +1,37 @@
+.tabs {
+  width: 100%;
+  margin: auto;
+  flex-wrap: wrap;
+  display: flex;
+}
+ 
+.tab-class {
+  width: calc(100%/4);
+  height: 50px;
+  background-color: darkgrey;
+  line-height: 50px;
+  font-size: 15px;
+  text-align: center;
+  display: block;
+  float: left;
+  order: -1;
+}
+ 
+input[name="tab-item"] {
+  display: none;
+}
+ 
+input:checked + .tab-class {
+  background-color: cadetblue;
+  color: aliceblue;
+}
+ 
+.tab-content {
+  display: none;
+  width: 100%;
+}
+ 
+input:checked + .tab-class + .tab-content {
+  display: block;
+  padding-top: 1rem;
+}
