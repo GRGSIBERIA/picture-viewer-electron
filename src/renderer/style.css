@@ -1,144 +1,56 @@
-.tab-class {
-    width: calc(100%/5);
-    height: 3rem;
-    background-color: darkgray;
-    line-height: 3rem;
-    font-size: 12pt;
+/*タブ切り替え全体のスタイル*/
+.tabs {
+    margin-top: 50px;
+    padding-bottom: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 700px;
+    margin: 0 auto;}
+  
+  /*タブのスタイル*/
+  .tab-item {
+    width: calc(100%/4);
+    height: 50px;
+    border-bottom: 3px solid #5ab4bd;
+    background-color: #d9d9d9;
+    line-height: 50px;
+    font-size: 16px;
     text-align: center;
+    color: #565656;
     display: block;
     float: left;
-    order:-1;
-}
-
-input[name="navigation-tab"] {
-    display: none;
-}
-
-input:checked + .tab-class {
-    background-color: cadetblue;
-    color: aliceblue;
-
-    letter-spacing : 4px;                /* 文字間 */
-    text-shadow    : 
-         2px  2px 1px #000000,
-        -2px  2px 1px #000000,
-         2px -2px 1px #000000,
-        -2px -2px 1px #000000,
-         2px  0px 1px #000000,
-         0px  2px 1px #000000,
-        -2px  0px 1px #000000,
-         0px -2px 1px #000000;        /* 文字の影 */
-}
-
-.navigation-content {
-    display: none;
-    width: 100%;
-}
-
-input:checked + .tab-class + .navigation-content {
-    display: block;
-}
-
-#navigation-area {
-    width: 100%;
-    margin: auto;
-    flex-wrap: wrap;
-    display: flex;
-}
-
-/**
- * 下線付きのテキストボックス用マークアップ
- */
-.cp-iptext {
-    position: relative;
-    width: 80%;
-    margin: 40px 3%;
-}
-.cp-iptext input[type="text"] {
-    font: 15px/24px sans-serif;
-    box-sizing: border-box;
-    width: 100%;
-    letter-spacing: 1px;
-    padding-left: 4em;
-}
-.cp-iptext input[type="text"]:focus {
-    outline: none;
-}
-.effect-input {
-    padding: 4px 0;
-    border: 0;
-    border-bottom: 1px solid #1b2538;
-    background-color: transparent;
-}
-.effect-input ~ .focus-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    transition: 0.4s;
-    background-color: #C41A41;
-}
-.effect-input:focus ~ .focus-line,
-.cp-iptext.effect-input ~ .focus-line {
-    width: 100%;
-    transition: 0.4s;
-}
-.effect-input ~ label {
-    position: absolute;
-    z-index: -1;
-    top: 4px;
-    left: 0;
-    width: 100%;
-    transition: 0.3s;
-    letter-spacing: 0.5px;
-    color: #aaaaaa;
-}
-.effect-input:focus ~ label, .cp-iptext.effect-input ~ label {
-    font-size: 12px;
-    top: -16px;
-    transition: 0.3s;
-    color: #C41A41;
-}
-
-/**
- * ボタンのマークアップ
- */
-.btn, a.btn, button.btn, input[type="button"] {
-    line-height: 1.5;
-    position: relative;
-    display: inline-block;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    /*padding: 1rem, 4rem;*/
-    cursor: pointer;
-    transition: all 0.3s;
-    user-select: none;
     text-align: center;
-    vertical-align: middle;
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    color: #212529;
-    border-radius: 0.5rem;
-}
-.btn--primary, a.btn--primary {
-    color: aliceblue;
-    background-color: cadetblue;
-}
-.btn--primary:hover, a.btn--primary:hover {
-    color: aliceblue;
-    background-color: cadetblue;
-
-    letter-spacing : 4px;                /* 文字間 */
-    text-shadow    : 
-         2px  2px 1px #000000,
-        -2px  2px 1px #000000,
-         2px -2px 1px #000000,
-        -2px -2px 1px #000000,
-         2px  0px 1px #000000,
-         0px  2px 1px #000000,
-        -2px  0px 1px #000000,
-         0px -2px 1px #000000;        /* 文字の影 */
-}
+    font-weight: bold;
+    transition: all 0.2s ease;
+  }
+  .tab-item:hover {
+    opacity: 0.75;
+  }
+  
+  /*ラジオボタンを全て消す*/
+  input[name="tab-item"] {
+    display: none;
+  }
+  
+  /*タブ切り替えの中身のスタイル*/
+  .tab-content {
+    display: none;
+    padding: 40px 40px 0;
+    clear: both;
+    overflow: hidden;
+  }
+  
+  
+  /*選択されているタブのコンテンツのみを表示*/
+  #import:checked ~ #import-content,
+  #search:checked ~ #search-content,
+  #picture:checked ~ #picture-content,
+  #collage:checked ~ #collage-content {
+    display: block;
+  }
+  
+  /*選択されているタブのスタイルを変える*/
+  .tabs input:checked + .tab-item {
+    background-color: #5ab4bd;
+    color: #fff;
+  }

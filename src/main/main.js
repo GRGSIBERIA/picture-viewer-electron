@@ -40,7 +40,7 @@ function createMainWindow() {
     });
 
     if (isDevelopment) {
-        window.webContents.openDevTools();
+        //window.webContents.openDevTools();
     }
   
     if (isDevelopment) {

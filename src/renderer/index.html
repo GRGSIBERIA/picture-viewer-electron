@@ -3,45 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Picture Viewer</title>
-    <link rel="stylesheet" href="../renderer/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../renderer/style.css">
     <script src="../renderer/index.js"></script>
 </head>
 <body>
-    <section id="navigation-area">
-        <input type="radio" name="navigation-tab" id="import-tab" checked/>
-        <label class="tab-class" for="import-tab">読み込み</label>
-        <div id="import-tab-contents" class="navigation-content">
-            <div class="cp-iptext">
-                <input type="text" placeholder="" class="effect-input" id="import-directory"/>
-                <label>読み込みディレクトリ</label>
-                <span class="focus-line"></span>
-            </div>
-            <input type="button" class="btn btn--primary" name="import-button" value="読み込み実行" id="import-button">
+    <div class="tabs">
+        <input id="import-tab" type="radio" name="tab-item" checked>
+        <label class="tab-item" for="import-tab">IMPORT</label>
+
+        <input id="search-tab" type="radio" name="tab-item">
+        <label class="tab-item" for="search-tab">SEARCH</label>
+
+        <input id="picture-tab" type="radio" name="tab-item">
+        <label class="tab-item" for="picture-tab">PICTURE</label>
+
+        <input id="collage-tab" type="radio" name="tab-item">
+        <label class="tab-item" for="collage-tab">COLLAGE</label>
+
+        <div class="tab-content" id="import-content">
+            <input type="button" id="import-button" value="Start Import">
         </div>
 
-        <input type="radio" name="navigation-tab" id="search-tab"/>
-        <label class="tab-class" for="search-tab">検索</label>
-        <div id="search-tab-contents" class="navigation-content">
-            <div class="cp-iptext">
-                <input type="text" placeholder="" class="effect-input"/>
-                <label>検索キーワード</label>
-                <span class="focus-line"></span>
-            </div>
+        <div class="tab-content" id="search-content">
         </div>
 
-        <input type="radio" name="navigation-tab" id="view-tab" />
-        <label class="tab-class" for="view-tab">閲覧</label>
-        <div id="view-tab-contents" class="navigation-content">
-            view tab
+        <div class="tab-content" id="picture-content">
         </div>
 
-        <input type="radio" name="navigation-tab" id="collage-tab" />
-        <label class="tab-class" for="collage-tab">コラージュ</label>
-        <div id="collage-tab-content" class="navigation-content">
-            collage tab
+        <div class="tab-content" id="collage-tab">
         </div>
-
-        
-    </section>
+    </div>
 </body>
 </html>

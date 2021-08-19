@@ -37,12 +37,12 @@
     "commonSourceDirectory": "src/common",
     "staticSourceDirectory": "src/static",
     "title": true,
-    "whiteListedModules": ["foo-ui-library"],
-  
+    "whiteListedModules": [
+      "foo-ui-library"
+    ],
     "main": {
       "sourceDirectory": "src/main"
     },
-  
     "renderer": {
       "sourceDirectory": "src/renderer",
       "template": "src/renderer/index.html"
