@@ -33,4 +33,5 @@ input:checked + .tab_class {
  
 input:checked + .tab_class + .tab-content {
   display: block;
+  padding-top: 1rem;
 }
