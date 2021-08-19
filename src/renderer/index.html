@@ -4,30 +4,35 @@
     <meta charset="UTF-8">
     <title>Picture Viewer</title>
     <link rel="stylesheet" href="../renderer/style.css">
-    <script src="../renderer/index.js"></script>
 </head>
 <body>
     <div class="tabs">
         <input type="radio" name="tab-item" id="tab-import" checked>
-        <label class="tab_class" for="tab-import">読み込み</label>
+        <label class="tab-class" for="tab-import">読み込み</label>
         <div class="tab-content">
-            <p>タブ1のコンテンツを表示します</p>
+            <div>
+                <label for="import-button">読み込むフォルダ</label>
+            </div>
+            <div>
+                <input id="import-button" type="file" name="upfile[]" webkitdirectory>
+            </div>
         </div>
         <input type="radio" name="tab-item" id="tab-search" >
-        <label class="tab_class" for="tab-search">検索</label>
+        <label class="tab-class" for="tab-search">検索</label>
         <div class="tab-content">
             <p>タブ2のコンテンツを表示します</p>
         </div>
         <input type="radio" name="tab-item" id="tab-picture" >
-        <label class="tab_class" for="tab-picture">閲覧</label>
+        <label class="tab-class" for="tab-picture">閲覧</label>
         <div class="tab-content">
             <p>タブ3のコンテンツを表示します</p>
         </div>
         <input type="radio" name="tab-item" id="tab-collage" >
-        <label class="tab_class" for="tab-collage">コラージュ</label>
+        <label class="tab-class" for="tab-collage">コラージュ</label>
         <div class="tab-content">
             <p>タブ4のコンテンツを表示します</p>
         </div>
-      </div>
+    </div>
+    <script src="../renderer/index.js"></script>
 </body>
 </html>

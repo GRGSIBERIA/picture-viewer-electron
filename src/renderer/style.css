@@ -5,7 +5,7 @@
   display: flex;
 }
  
-.tab_class {
+.tab-class {
   width: calc(100%/4);
   height: 50px;
   background-color: darkgrey;
@@ -21,7 +21,7 @@ input[name="tab-item"] {
   display: none;
 }
  
-input:checked + .tab_class {
+input:checked + .tab-class {
   background-color: cadetblue;
   color: aliceblue;
 }
@@ -31,7 +31,7 @@ input:checked + .tab_class {
   width: 100%;
 }
  
-input:checked + .tab_class + .tab-content {
+input:checked + .tab-class + .tab-content {
   display: block;
   padding-top: 1rem;
 }
