@@ -35,3 +35,10 @@ input:checked + .tab-class + .tab-content {
   display: block;
   padding-top: 1rem;
 }
+
+#import-log {
+  width: 100%;
+  height: 10rem;
+  background-color: white;
+  overflow: scroll;
+}
