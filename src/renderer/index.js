@@ -52,12 +52,13 @@ document.getElementById('import-button').addEventListener("change", event => {
                                 path: relativePath
                             };
 
-                            (async () => {
+                            // 非同期処理が挟まるのでここでまとめてロックをかける
+                            navigator.locks.request("add record", async () => {
                                 record["original-digest"] = await sha256(e.target.result);
                                 record["thumbnail-record"] = await sha256(thumbnail);
                                 data.push(record);
                                 progress.setAttribute('value', i + 1);
-                            })();
+                            });
                         }
                         img.src = e.target.result;
                     }
