@@ -6,6 +6,18 @@ async function sha256(text) {
     return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2, '0')).join('');
 }
 
+function getThumbnail(sourceURI) {
+    let img = new Image();
+    img.src = sourceURI;
+    const factor = 128 / Math.max(img.width, img.height);
+    let canvas = document.createElement("canvas");
+    canvas.width = 128;
+    canvas.height = 128;
+    let context = canvas.getContext('2d');
+    context.drawImage(img, 0, 0, img.width / factor, img.height / factor);
+    return canvas.toDataURL();
+}
+
 document.getElementById('import-button').addEventListener("change", event => {
     const files = event.target.files;
     const file_count = files.length;
@@ -33,17 +45,19 @@ document.getElementById('import-button').addEventListener("change", event => {
                 const reader = new FileReader();
                 reader.onload = (function(data) { 
                     return function(e) {
-                        // sha256のダイジェストを生成する
-                        sha256(e.target.result).then(hash => {
-                            const record = {
-                                "original": e.target.result,
-                                "path": relativePath,
-                                "original-digest": originDigest,
-                            };
+                        const thumbnail = getThumbnail(e.target.result);
+                        let record = {
+                            original: e.target.result,
+                            thumbnail: thumbnail,
+                            path: relativePath
+                        };
+
+                        (async () => {
+                            record["original-digest"] = await sha256(e.target.result);
+                            record["thumbnail-record"] = await sha256(thumbnail);
                             data.push(record);
-                            progress.setAttribute('value', i);
-                            console.log(record);
-                        });
+                            progress.setAttribute('value', i + 1);
+                        })();
                     }
                 })(standby);
                 reader.readAsDataURL(file);
@@ -51,5 +65,4 @@ document.getElementById('import-button').addEventListener("change", event => {
                 break;
         }
     }
-    progress.setAttribute('value', file_count);
 });
