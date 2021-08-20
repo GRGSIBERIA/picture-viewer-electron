@@ -8,13 +8,24 @@ async function sha256(text) {
 
 function getThumbnail(sourceURI) {
     let img = new Image();
-    img.src = sourceURI;
-    const factor = 128 / Math.max(img.width, img.height);
     let canvas = document.createElement("canvas");
-    canvas.width = 128;
-    canvas.height = 128;
     let context = canvas.getContext('2d');
-    context.drawImage(img, 0, 0, img.width / factor, img.height / factor);
+
+    img.onload = function(event) {
+        const factor = 128 / Math.max(this.width, this.height);
+        const destW = this.width * factor;
+        const destH = this.height * factor;
+        canvas.width = dstW;
+        canvas.height = dstH;
+        context.drawImage(this, 0, 0, this.width, this.height, 0, 0, dstW, dstH);
+        ////////////////////////////////////////////////////////////////////////////
+        /*
+        ここの処理がわからなくなった
+        */
+       // 完了まで待ってcanvas.toDataURLを返す
+    }
+    img.src = sourceURI;
+    
     return canvas.toDataURL();
 }
 
