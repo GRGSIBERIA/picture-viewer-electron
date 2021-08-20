@@ -6,29 +6,6 @@ async function sha256(text) {
     return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2, '0')).join('');
 }
 
-function getThumbnail(sourceURI) {
-    let img = new Image();
-    let canvas = document.createElement("canvas");
-    let context = canvas.getContext('2d');
-
-    img.onload = function(event) {
-        const factor = 128 / Math.max(this.width, this.height);
-        const destW = this.width * factor;
-        const destH = this.height * factor;
-        canvas.width = dstW;
-        canvas.height = dstH;
-        context.drawImage(this, 0, 0, this.width, this.height, 0, 0, dstW, dstH);
-        ////////////////////////////////////////////////////////////////////////////
-        /*
-        ここの処理がわからなくなった
-        */
-       // 完了まで待ってcanvas.toDataURLを返す
-    }
-    img.src = sourceURI;
-    
-    return canvas.toDataURL();
-}
-
 document.getElementById('import-button').addEventListener("change", event => {
     const files = event.target.files;
     const file_count = files.length;
@@ -56,19 +33,33 @@ document.getElementById('import-button').addEventListener("change", event => {
                 const reader = new FileReader();
                 reader.onload = (function(data) { 
                     return function(e) {
-                        const thumbnail = getThumbnail(e.target.result);
-                        let record = {
-                            original: e.target.result,
-                            thumbnail: thumbnail,
-                            path: relativePath
-                        };
+                        let img = new Image();
+                        let canvas = document.createElement("canvas");
+                        let context = canvas.getContext('2d');
 
-                        (async () => {
-                            record["original-digest"] = await sha256(e.target.result);
-                            record["thumbnail-record"] = await sha256(thumbnail);
-                            data.push(record);
-                            progress.setAttribute('value', i + 1);
-                        })();
+                        img.onload = function(event) {
+                            const factor = 128 / Math.max(this.width, this.height);
+                            const destW = this.width * factor;
+                            const destH = this.height * factor;
+                            canvas.width = destW;
+                            canvas.height = destH;
+                            context.drawImage(this, 0, 0, this.width, this.height, 0, 0, destW, destH);
+                            const thumbnail = canvas.toDataURL();
+
+                            let record = {
+                                original: e.target.result,
+                                thumbnail: thumbnail,
+                                path: relativePath
+                            };
+
+                            (async () => {
+                                record["original-digest"] = await sha256(e.target.result);
+                                record["thumbnail-record"] = await sha256(thumbnail);
+                                data.push(record);
+                                progress.setAttribute('value', i + 1);
+                            })();
+                        }
+                        img.src = e.target.result;
                     }
                 })(standby);
                 reader.readAsDataURL(file);
