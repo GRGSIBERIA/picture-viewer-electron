@@ -118,7 +118,9 @@ document.getElementById("import-database").addEventListener("click", event => {
                 filename: filename,
                 pagenum: pagenum
             }
-            standby[i]["tags"] = []
+            let tags = standby[i]["path"].split("/");
+            tags.pop();
+            standby[i]["tags"] = tags;
 
             // ここまでデータベースへの追記準備
         }
