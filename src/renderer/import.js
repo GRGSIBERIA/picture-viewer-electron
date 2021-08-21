@@ -1,5 +1,7 @@
 var standby = []
 var importedThumbnails = []
+var importedCount = 0;
+var fileCount = 0;
 
 async function sha256(text) {
     const uint8 = new TextEncoder().encode(text);
@@ -19,11 +21,13 @@ document.getElementById('import-button').addEventListener("change", event => {
 
     const files = event.target.files;
     const file_count = files.length;
+    importedCount = 0;
+    fileCount = files.length;
     
     let progress = document.getElementById('import-progress');
     let importLog = document.getElementById('import-log');
 
-    progress.setAttribute('max', file_count);
+    progress.setAttribute('max', file_count - 1);
     progress.setAttribute('value', 0);
 
     removeChildren(document.getElementById("import-log"));
@@ -82,6 +86,8 @@ document.getElementById('import-button').addEventListener("change", event => {
 
                                 let thumbParent = document.getElementById("imported-thumbnails");
                                 thumbParent.appendChild(pictureTag);
+
+                                importedCount++;
                             });
                         }
                         img.src = e.target.result;
@@ -91,5 +97,32 @@ document.getElementById('import-button').addEventListener("change", event => {
             default:
                 break;
         }
+    }
+});
+
+document.getElementById("import-database").addEventListener("click", event => {
+    if (fileCount >= importedCount) {
+        // データベースへの登録準備
+        for (let i = 0; i < standby.length; ++i)
+        {
+            const filename = standby[i]["path"].split("/").pop();
+            const re = /[0-9]+/g;
+            let pagenum = null;
+            const matches = filename.split(".").shift().match(re);
+            if (matches != null) {
+                pagenum = Number(matches.pop());
+            }
+
+            standby[i]["attributes"] = {
+                path: standby[i]["path"],
+                filename: filename,
+                pagenum: pagenum
+            }
+            standby[i]["tags"] = []
+
+            // ここまでデータベースへの追記準備
+        }
+
+        // standbyの中身を整理できたものとして、データベースに追記する
     }
 });
