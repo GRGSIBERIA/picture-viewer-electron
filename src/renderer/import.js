@@ -126,5 +126,15 @@ document.getElementById("import-database").addEventListener("click", event => {
         }
 
         // standbyの中身を整理できたものとして、データベースに追記する
+        (async () => {
+            await window.myapi.import(standby);
+            standby = [];
+        })();
+
+        fileCount = 0;
+        importedCount = -1;
+        importedThumbnails = [];
+        let thumbs = document.getElementById("imported-thumbnails");
+        removeChildren(thumbs);
     }
 });

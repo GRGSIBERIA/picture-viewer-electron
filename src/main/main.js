@@ -102,4 +102,19 @@ ipcMain.handle("require", (event, component) => {
 ipcMain.handle("digest", (event, text) => {
     const hash = crypto.createHash('sha256').update(text, 'utf8').digest('hex');
     return hash;
-})
+});
+
+ipcMain.handle("import", async (event, items) => {
+    let upload = []
+    for (let i = 0; i < items.length; ++i) {
+        db.findOne({"original-digest": items[i]["original-digest"]}, (err, doc) => {
+            if (doc === null) {
+                db.insert(items[i], (err) => {
+                    if (err !== null) {
+                        console.log("success :", items[i]["original-digest"]);
+                    }
+                });
+            }
+        });
+    }
+});
