@@ -15,6 +15,7 @@ function removeChildren(parent) {
 
 document.getElementById('import-button').addEventListener("change", event => {
     importedThumbnails = []
+    standby = []
 
     const files = event.target.files;
     const file_count = files.length;
@@ -69,6 +70,7 @@ document.getElementById('import-button').addEventListener("change", event => {
                                 record["original-digest"] = await sha256(e.target.result);
                                 record["thumbnail-digest"] = await sha256(thumbnail);
                                 data.push(record);
+
                                 const num = Number(progress.getAttribute('value'));
                                 progress.setAttribute('value', num + 1);
 
@@ -76,6 +78,7 @@ document.getElementById('import-button').addEventListener("change", event => {
                                 let thumbTag = document.createElement("img");
                                 thumbTag.src = record["thumbnail"];
                                 pictureTag.appendChild(thumbTag)
+                                thumbTag.setAttribute("class", "thumb")
 
                                 let thumbParent = document.getElementById("imported-thumbnails");
                                 thumbParent.appendChild(pictureTag);
