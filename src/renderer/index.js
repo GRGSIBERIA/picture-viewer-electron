@@ -69,7 +69,8 @@ document.getElementById('import-button').addEventListener("change", event => {
                                 record["original-digest"] = await sha256(e.target.result);
                                 record["thumbnail-digest"] = await sha256(thumbnail);
                                 data.push(record);
-                                progress.setAttribute('value', i + 1);
+                                const num = Number(progress.getAttribute('value'));
+                                progress.setAttribute('value', num + 1);
 
                                 let pictureTag = document.createElement("picture");
                                 let thumbTag = document.createElement("img");
