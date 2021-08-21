@@ -8,7 +8,11 @@ const crypto = require('crypto');
 var db = new Datastore({
     filename: 'store.db',
     autoload: true
-})
+});
+
+// インデックスを張る
+db.ensureIndex({fieldName: "original-digest", unique: true}, err => {});
+db.ensureIndex({fieldName: "thumbnail-digest", unique: true}, err => {});
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -114,6 +118,8 @@ ipcMain.handle("import", async (event, items) => {
                         console.log("success :", items[i]["original-digest"]);
                     }
                 });
+            } else {
+                console.log("exists :", items[i]["original-digest"]);
             }
         });
     }
