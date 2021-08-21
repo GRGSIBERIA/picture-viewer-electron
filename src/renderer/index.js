@@ -1,4 +1,5 @@
 var standby = []
+var importedThumbnails = []
 
 async function sha256(text) {
     const uint8 = new TextEncoder().encode(text);
@@ -6,7 +7,15 @@ async function sha256(text) {
     return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2, '0')).join('');
 }
 
+function removeChildren(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 document.getElementById('import-button').addEventListener("change", event => {
+    importedThumbnails = []
+
     const files = event.target.files;
     const file_count = files.length;
     
@@ -15,6 +24,9 @@ document.getElementById('import-button').addEventListener("change", event => {
 
     progress.setAttribute('max', file_count);
     progress.setAttribute('value', 0);
+
+    removeChildren(document.getElementById("import-log"));
+    removeChildren(document.getElementById("imported-thumbnails"));
 
     for (let i = 0; i < file_count; ++i) {
         const file = files[i];
@@ -55,9 +67,17 @@ document.getElementById('import-button').addEventListener("change", event => {
                             // 非同期処理が挟まるのでここでまとめてロックをかける
                             navigator.locks.request("add record", async () => {
                                 record["original-digest"] = await sha256(e.target.result);
-                                record["thumbnail-record"] = await sha256(thumbnail);
+                                record["thumbnail-digest"] = await sha256(thumbnail);
                                 data.push(record);
                                 progress.setAttribute('value', i + 1);
+
+                                let pictureTag = document.createElement("picture");
+                                let thumbTag = document.createElement("img");
+                                thumbTag.src = record["thumbnail"];
+                                pictureTag.appendChild(thumbTag)
+
+                                let thumbParent = document.getElementById("imported-thumbnails");
+                                thumbParent.appendChild(pictureTag);
                             });
                         }
                         img.src = e.target.result;

@@ -42,3 +42,9 @@ input:checked + .tab-class + .tab-content {
   background-color: white;
   overflow: scroll;
 }
+
+#imported-thumbnails {
+  display: grid;
+  grid-auto-rows: 128px;
+  grid-template-columns: repeat(auto-fill, 128px);
+}
