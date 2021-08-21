@@ -1,7 +1,14 @@
 'use strict';
 
 const {app, Menu, BrowserWindow, ipcMain} = require("electron");
+const Datastore = require('nedb');
 const path = require("path");
+const crypto = require('crypto');
+
+var db = new Datastore({
+    filename: 'store.db',
+    autoload: true
+})
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -91,3 +98,8 @@ app.on('ready', () => {
 ipcMain.handle("require", (event, component) => {
     return require(component);
 });
+
+ipcMain.handle("digest", (event, text) => {
+    const hash = crypto.createHash('sha256').update(text, 'utf8').digest('hex');
+    return hash;
+})

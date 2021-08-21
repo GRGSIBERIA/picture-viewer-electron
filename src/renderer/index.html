@@ -16,6 +16,18 @@
             <div>
                 <input id="import-button" type="file" name="upfile[]" webkitdirectory>
             </div>
+            <div>
+                <progress id="import-progress" max="100" value="0">10</progress>
+            </div>
+            <div>
+                <input type="button" id="import-database" value="読み込んだ画像をデータベースに入力する">
+            </div>
+            <div id="import-log">
+                
+            </div>
+            <div id="imported-thumbnails">
+
+            </div>
         </div>
         <input type="radio" name="tab-item" id="tab-search" >
         <label class="tab-class" for="tab-search">検索</label>
@@ -33,6 +45,6 @@
             <p>タブ4のコンテンツを表示します</p>
         </div>
     </div>
-    <script src="../renderer/index.js"></script>
+    <script src="../renderer/import.js"></script>
 </body>
 </html>
