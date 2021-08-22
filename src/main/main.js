@@ -123,6 +123,15 @@ ipcMain.handle("import", async (event, items) => {
 });
 
 ipcMain.handle("find", async (event, param) => {
+    /*
+    param's format
+    {
+        "query": str,
+        "sort": {pagenum: 1},    // default
+        "limit": 20,
+        "page": 0
+    }
+    */
     const keywords = param["query"].split(" ");
 
     const sorting = param["sort"];
@@ -132,12 +141,19 @@ ipcMain.handle("find", async (event, param) => {
     const page = param["page"];
     // pagination = limit * page;
 
+    console.log(param);
+    db.count({}, (err, count) => {
+        console.log(count);
+    });
+
+    let returnDocs = [];
+
     if (keywords.length > 1) {
         db.find({tags: {$in: keywords}}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
             // 得にエラーがなければレンダラーに結果を返す
             if (err !== null) {
                 // search.jsに送る
-                mainWindow.webContents.send('find pictures', docs);
+                win.webContents.send("show search thumbnails", docs);
             } else {
                 console.log(err);
             }
@@ -145,10 +161,12 @@ ipcMain.handle("find", async (event, param) => {
     } else {
         db.find({}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
             if (err !== null) {
-                mainWindow.webContents.send('find pictures', docs);
+                win.webContents.send("show search thumbnails", docs);
             } else {
                 console.log(err);
             }
         });
     }
+
+    return returnDocs;
 });
