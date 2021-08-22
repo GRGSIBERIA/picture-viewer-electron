@@ -8,7 +8,11 @@ const crypto = require('crypto');
 var db = new Datastore({
     filename: 'store.db',
     autoload: true
-})
+});
+
+// インデックスを張る
+db.ensureIndex({fieldName: "original-digest", unique: true}, err => {});
+db.ensureIndex({fieldName: "thumbnail-digest", unique: true}, err => {});
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -102,4 +106,19 @@ ipcMain.handle("require", (event, component) => {
 ipcMain.handle("digest", (event, text) => {
     const hash = crypto.createHash('sha256').update(text, 'utf8').digest('hex');
     return hash;
-})
+});
+
+ipcMain.handle("import", async (event, items) => {
+    let upload = []
+    for (let i = 0; i < items.length; ++i) {
+        db.findOne({"original-digest": items[i]["original-digest"]}, (err, doc) => {
+            if (doc === null) {
+                db.insert(items[i], (err) => {
+                    if (err !== null) {
+                        console.log("duplicated :", items[i]["original-digest"]);
+                    }
+                });
+            }
+        });
+    }
+});

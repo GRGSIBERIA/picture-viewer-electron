@@ -118,11 +118,22 @@ document.getElementById("import-database").addEventListener("click", event => {
                 filename: filename,
                 pagenum: pagenum
             }
-            standby[i]["tags"] = []
+            let tags = standby[i]["path"].split("/");
+            tags.pop();
+            standby[i]["tags"] = tags;
 
             // ここまでデータベースへの追記準備
         }
 
         // standbyの中身を整理できたものとして、データベースに追記する
+        (async () => {
+            await window.myapi.import(standby);
+            standby = [];
+            fileCount = 0;
+            importedCount = -1;
+            importedThumbnails = [];
+            let thumbs = document.getElementById("imported-thumbnails");
+            removeChildren(thumbs);
+        })();
     }
 });
