@@ -115,11 +115,9 @@ ipcMain.handle("import", async (event, items) => {
             if (doc === null) {
                 db.insert(items[i], (err) => {
                     if (err !== null) {
-                        console.log("success :", items[i]["original-digest"]);
+                        console.log("duplicated :", items[i]["original-digest"]);
                     }
                 });
-            } else {
-                console.log("exists :", items[i]["original-digest"]);
             }
         });
     }
