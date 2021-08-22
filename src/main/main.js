@@ -109,7 +109,6 @@ ipcMain.handle("digest", (event, text) => {
 });
 
 ipcMain.handle("import", async (event, items) => {
-    let upload = []
     for (let i = 0; i < items.length; ++i) {
         db.findOne({"original-digest": items[i]["original-digest"]}, (err, doc) => {
             if (doc === null) {
