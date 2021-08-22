@@ -121,3 +121,34 @@ ipcMain.handle("import", async (event, items) => {
         });
     }
 });
+
+ipcMain.handle("find", async (event, param) => {
+    const keywords = param["query"].split(" ");
+
+    const sorting = param["sort"];
+    /* ex. {pagenum: 1}, {filename: 1}, {vote: 1} */
+
+    const limit = param["limit"];
+    const page = param["page"];
+    // pagination = limit * page;
+
+    if (keywords.length > 1) {
+        db.find({tags: {$in: keywords}}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
+            // 得にエラーがなければレンダラーに結果を返す
+            if (err !== null) {
+                // search.jsに送る
+                mainWindow.webContents.send('find pictures', docs);
+            } else {
+                console.log(err);
+            }
+        });
+    } else {
+        db.find({}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
+            if (err !== null) {
+                mainWindow.webContents.send('find pictures', docs);
+            } else {
+                console.log(err);
+            }
+        });
+    }
+});

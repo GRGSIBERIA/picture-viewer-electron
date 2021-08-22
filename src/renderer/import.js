@@ -66,7 +66,8 @@ document.getElementById('import-button').addEventListener("change", event => {
                             let record = {
                                 original: e.target.result,
                                 thumbnail: thumbnail,
-                                path: relativePath
+                                path: relativePath,
+                                vote: 0
                             };
 
                             // 非同期処理が挟まるのでここでまとめてロックをかける
