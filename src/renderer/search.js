@@ -11,7 +11,7 @@ window.myapi.on("show search thumbnails", (event, docs) => {
 
 document.getElementById("tab-search").addEventListener("click", (event) => {
     (async () => {
-        await findDocuments({
+        await window.myapi.find({
             query: "",
             sort: {pagenum: 1},
             limit: 20,
