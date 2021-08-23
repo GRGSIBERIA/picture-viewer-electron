@@ -127,9 +127,9 @@ ipcMain.handle("find", async (event, param) => {
     param's format
     {
         "query": str,
-        "sort": {pagenum: 1},    // default
-        "limit": 20,
-        "page": 0
+        "sort": {pagenum: 1},    // default, require
+        "limit": 20,    // require
+        "page": 0       // require
     }
     */
    
@@ -145,9 +145,13 @@ ipcMain.handle("find", async (event, param) => {
     const page = param["page"];
     // pagination = limit * page;
 
-    db.find({}).skip(0).limit(5).exec((err, docs) => {
-        for (let i = 0; i < docs.length; ++i) {
-            console.log(docs[i]["original-digest"]);
-        }
-    });
+    if (keywords === null) {
+        db.find({}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
+            for (let i = 0; i < docs.length; ++i) {
+                console.log(docs[i]["original-digest"]);
+            }
+        });
+    } else {
+
+    }
 });
