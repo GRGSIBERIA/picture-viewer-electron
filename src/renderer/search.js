@@ -16,8 +16,6 @@ window.myapi.on("show search thumbnails", (event, docs) => {
     }
 });
 
-document.getElementById("tab-search").addEventListener("click", (event) => {
-    (async () => {
-        await window.myapi.find(emptyQuery);
-    })();
+document.getElementById("tab-search").addEventListener("click", async (event) => {
+    await window.myapi.find(emptyQuery);
 });

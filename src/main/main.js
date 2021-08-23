@@ -132,7 +132,11 @@ ipcMain.handle("find", async (event, param) => {
         "page": 0
     }
     */
-    const keywords = param["query"] === undefined || param["query"] === null ? null : param["query"].split(" ");
+   
+    const keywords = 
+        param["query"] === undefined || 
+        param["query"] === null || 
+        param["query"].trim() === "" ? null : param["query"].split(" ");
 
     const sorting = param["sort"];
     /* ex. {pagenum: 1}, {filename: 1}, {vote: 1} */
@@ -141,40 +145,9 @@ ipcMain.handle("find", async (event, param) => {
     const page = param["page"];
     // pagination = limit * page;
 
-    console.log(param);
-    db.count({}, (err, count) => {
-        console.log(count);
+    db.find({}).skip(0).limit(5).exec((err, docs) => {
+        for (let i = 0; i < docs.length; ++i) {
+            console.log(docs[i]["original-digest"]);
+        }
     });
-
-    let returnDocs = [];
-
-    if (keywords === null) {
-        db.find({}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
-            if (err !== null) {
-                win.webContents.send("show search thumbnails", docs);
-            } else {
-                console.log(err);
-            }
-        });
-    } else if (keywords.length > 1) {
-        db.find({tags: {$in: keywords}}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
-            // 得にエラーがなければレンダラーに結果を返す
-            if (err !== null) {
-                // search.jsに送る
-                win.webContents.send("show search thumbnails", docs);
-            } else {
-                console.log(err);
-            }
-        });
-    } else {
-        db.find({}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
-            if (err !== null) {
-                win.webContents.send("show search thumbnails", docs);
-            } else {
-                console.log(err);
-            }
-        });
-    }
-
-    return returnDocs;
 });
