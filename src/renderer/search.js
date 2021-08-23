@@ -1,5 +1,12 @@
 let viewing = [];
 
+const emptyQuery = {
+    query: null,
+    sort: {pagenum: 1},
+    limit: 20,
+    page: 0
+}
+
 window.myapi.on("show search thumbnails", (event, docs) => {
     let listParent = document.getElementById("thumbnail-listings");
     for (let i = 0; i < docs.length; ++i) {
@@ -11,11 +18,6 @@ window.myapi.on("show search thumbnails", (event, docs) => {
 
 document.getElementById("tab-search").addEventListener("click", (event) => {
     (async () => {
-        await window.myapi.find({
-            query: "",
-            sort: {pagenum: 1},
-            limit: 20,
-            page: 0
-        });
+        await window.myapi.find(emptyQuery);
     })();
 });

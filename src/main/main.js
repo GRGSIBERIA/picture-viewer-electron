@@ -132,7 +132,7 @@ ipcMain.handle("find", async (event, param) => {
         "page": 0
     }
     */
-    const keywords = param["query"].split(" ");
+    const keywords = param["query"] === undefined || param["query"] === null ? null : param["query"].split(" ");
 
     const sorting = param["sort"];
     /* ex. {pagenum: 1}, {filename: 1}, {vote: 1} */
@@ -148,7 +148,15 @@ ipcMain.handle("find", async (event, param) => {
 
     let returnDocs = [];
 
-    if (keywords.length > 1) {
+    if (keywords === null) {
+        db.find({}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
+            if (err !== null) {
+                win.webContents.send("show search thumbnails", docs);
+            } else {
+                console.log(err);
+            }
+        });
+    } else if (keywords.length > 1) {
         db.find({tags: {$in: keywords}}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
             // 得にエラーがなければレンダラーに結果を返す
             if (err !== null) {
