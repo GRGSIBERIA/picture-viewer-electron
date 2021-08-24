@@ -42,8 +42,9 @@ let mainWindow;
 function createMainWindow() {
     const window = new BrowserWindow({
         webPreferences: {
-            nodeIntegration: true,
+            nodeIntegration: false,
             contextIsolation: true,
+            worldSafeExecuteJavaScript: true,
             preload: path.join(__dirname, "preload.js")
         },
         width: 800,
@@ -99,17 +100,7 @@ app.on('ready', () => {
     mainWindow = createMainWindow()
 });
 
-ipcMain.handle("require", (event, component) => {
-    return require(component);
-});
-
-ipcMain.handle("digest", (event, text) => {
-    const hash = crypto.createHash('sha256').update(text, 'utf8').digest('hex');
-    return hash;
-});
-
 ipcMain.handle("import", async (event, items) => {
-    let upload = []
     for (let i = 0; i < items.length; ++i) {
         db.findOne({"original-digest": items[i]["original-digest"]}, (err, doc) => {
             if (doc === null) {
@@ -120,5 +111,37 @@ ipcMain.handle("import", async (event, items) => {
                 });
             }
         });
+    }
+});
+
+ipcMain.handle("find", async (event, param) => {
+    /*
+    param's format
+    {
+        "query": str,
+        "sort": {pagenum: 1},    // default, require
+        "limit": 20,    // require
+        "page": 0       // require
+    }
+    */
+   
+    const keywords = 
+        param["query"] === undefined || 
+        param["query"] === null || 
+        param["query"].trim() === "" ? null : param["query"].split(" ");
+
+    const sorting = param["sort"];
+    /* ex. {pagenum: 1}, {filename: 1}, {vote: 1} */
+
+    const limit = param["limit"];
+    const page = param["page"];
+    // pagination = limit * page;
+
+    if (keywords === null) {
+        db.find({}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
+            mainWindow.webContents.send("showSearchThumbnails", docs);
+        });
+    } else {
+
     }
 });
