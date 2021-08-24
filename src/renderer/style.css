@@ -74,7 +74,7 @@ input:checked + .tab-class + .tab-content {
 #thumbnail-listings {
   flex-basis: 70%;
   padding: 8px 8px 8px 8px;
-  background-color: green;
+  background-color: white;
 
   display: flex;
   flex-wrap: wrap;
@@ -87,4 +87,16 @@ div.tag-editor {
   background-color: blue;
   flex-basis: 15%;
   padding: 8px 8px 8px 8px;
+}
+
+div#searched-thumbnails > img {
+  object-fit: contain;
+  width: 128px;
+  height: 128px;
+  margin: 2px 2px 2px 2px;
+  border: thin solid green;
+}
+
+div#searched-thumbnails > img:hover {
+  border: thin solid red;
 }

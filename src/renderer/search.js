@@ -8,7 +8,7 @@ const emptyQuery = {
 }
 
 window.myapi.on("showSearchThumbnails", (event, docs) => {
-    let listParent = document.getElementById("thumbnail-listings");
+    let listParent = document.getElementById("searched-thumbnails");
     for (let i = 0; i < docs.length; ++i) {
         let thumb = document.createElement("img");
         thumb.src = docs[i]["thumbnail"];
