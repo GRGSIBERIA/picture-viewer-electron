@@ -7,7 +7,7 @@ const emptyQuery = {
     page: 0
 }
 
-window.myapi.on("show search thumbnails", (event, docs) => {
+window.myapi.on("showSearchThumbnails", (event, docs) => {
     let listParent = document.getElementById("thumbnail-listings");
     for (let i = 0; i < docs.length; ++i) {
         let thumb = document.createElement("img");

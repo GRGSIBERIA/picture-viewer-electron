@@ -42,8 +42,9 @@ let mainWindow;
 function createMainWindow() {
     const window = new BrowserWindow({
         webPreferences: {
-            nodeIntegration: true,
+            nodeIntegration: false,
             contextIsolation: true,
+            worldSafeExecuteJavaScript: true,
             preload: path.join(__dirname, "preload.js")
         },
         width: 800,
@@ -99,15 +100,6 @@ app.on('ready', () => {
     mainWindow = createMainWindow()
 });
 
-ipcMain.handle("require", (event, component) => {
-    return require(component);
-});
-
-ipcMain.handle("digest", (event, text) => {
-    const hash = crypto.createHash('sha256').update(text, 'utf8').digest('hex');
-    return hash;
-});
-
 ipcMain.handle("import", async (event, items) => {
     for (let i = 0; i < items.length; ++i) {
         db.findOne({"original-digest": items[i]["original-digest"]}, (err, doc) => {
@@ -147,9 +139,7 @@ ipcMain.handle("find", async (event, param) => {
 
     if (keywords === null) {
         db.find({}).sort(sorting).skip(page * limit).limit(limit).exec((err, docs) => {
-            for (let i = 0; i < docs.length; ++i) {
-                console.log(docs[i]["original-digest"]);
-            }
+            mainWindow.webContents.send("showSearchThumbnails", docs);
         });
     } else {
 
