@@ -49,13 +49,20 @@ input:checked + .tab-class + .tab-content {
   grid-template-columns: repeat(auto-fill, 128px);
 }
 
+.wrapper {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+}
+
 #search-footer {
+  background-color: green;
+  width: 100%;
+  padding: 30px 0;
+
   position: absolute;
   bottom: 0;
-  height: 15vh;
-  width: 95%;
-  border-top: thin solid #000;
-  padding: 8px 8px 8px 8px;
 }
 
 #search-section {
