@@ -32,13 +32,13 @@ window.onload = async (event) => {
 
 document.getElementById("prevPage").addEventListener("click", async (event) => {
     _browsingPage -= 1;
-    const query = queryGenerator();
+    const query = queryBuilder();
     await window.myapi.find(query);
 });
 
 document.getElementById("nextPage").addEventListener("click", async (event) => {
     _browsingPage += 1;
-    const query = queryGenerator();
+    const query = queryBuilder();
     await window.myapi.find(query);
 });
 
@@ -62,7 +62,7 @@ function tagQuerySeparator() {
     return keyword.split(" ");
 }
 
-function queryGenerator() {
+function queryBuilder() {
     const limit = getNumofListings();
     const order = getOrder();
     const priority = getOrderPriority();
@@ -84,7 +84,7 @@ function queryGenerator() {
 
 document.getElementById("search-keyword").addEventListener('keypress', async (event) => {
     if (event.key === 'Enter') {
-        const query = queryGenerator();
+        const query = queryBuilder();
         await window.myapi.find(query);
     }
 });
