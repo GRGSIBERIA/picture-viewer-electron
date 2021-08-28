@@ -7,8 +7,18 @@ const emptyQuery = {
     page: 0
 }
 
+let _browsingPage = 0;
+
+function removeChildren(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 window.myapi.on("showSearchThumbnails", (event, docs) => {
     let listParent = document.getElementById("searched-thumbnails");
+    removeChildren(listParent);
+
     for (let i = 0; i < docs.length; ++i) {
         let thumb = document.createElement("img");
         thumb.src = docs[i]["thumbnail"];
@@ -19,6 +29,18 @@ window.myapi.on("showSearchThumbnails", (event, docs) => {
 window.onload = async (event) => {
     await window.myapi.find(emptyQuery);
 }
+
+document.getElementById("prevPage").addEventListener("click", async (event) => {
+    _browsingPage -= 1;
+    const query = queryGenerator();
+    await window.myapi.find(query);
+});
+
+document.getElementById("nextPage").addEventListener("click", async (event) => {
+    _browsingPage += 1;
+    const query = queryGenerator();
+    await window.myapi.find(query);
+});
 
 function getNumofListings() {
     const elem = document.getElementById("numof-listings");
@@ -35,14 +57,34 @@ function getOrderPriority() {
     return elem.value;
 }
 
+function tagQuerySeparator() {
+    const keyword = document.getElementById("search-keyword").value.trim();
+    return keyword.split(" ");
+}
+
+function queryGenerator() {
+    const limit = getNumofListings();
+    const order = getOrder();
+    const priority = getOrderPriority();
+    const tagQuery = tagQuerySeparator();
+
+    let query = {
+        query: null,
+        limit: limit,
+        sort: {[priority]: order},
+        page: _browsingPage
+    };
+    
+    if (tagQuery[0].trim().length > 0) {
+        query["query"] = {$in: tagQuery};
+    }
+
+    return query;
+}
+
 document.getElementById("search-keyword").addEventListener('keypress', async (event) => {
     if (event.key === 'Enter') {
-        const limit = getNumofListings();
-        const order = getOrder();
-        const priority = getOrderPriority();
-        const param = {
-            limit: limit,
-            
-        }
+        const query = queryGenerator();
+        await window.myapi.find(query);
     }
 });
