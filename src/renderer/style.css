@@ -1,8 +1,15 @@
+body {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
 .tabs {
   width: 100%;
   margin: auto;
   flex-wrap: wrap;
   display: flex;
+  flex: 1;
 }
  
 .tab-class {
@@ -47,22 +54,6 @@ input:checked + .tab-class + .tab-content {
   display: grid;
   grid-auto-rows: 128px;
   grid-template-columns: repeat(auto-fill, 128px);
-}
-
-.wrapper {
-  min-height: 100vh;
-  position: relative;
-  padding-bottom: 120px;
-  box-sizing: border-box;
-}
-
-#search-footer {
-  background-color: green;
-  width: 100%;
-  padding: 30px 0;
-
-  position: absolute;
-  bottom: 0;
 }
 
 #search-section {
@@ -120,4 +111,9 @@ span.box {
   margin-left: 8px;
   margin-right: 8px;
   border-radius: 1em;
+}
+
+footer {
+  background-color: green;
+  height: 30vh;
 }
