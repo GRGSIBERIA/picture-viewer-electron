@@ -53,21 +53,29 @@
                         <span>
                             <label for="listing-order">順序</label>
                             <select id="listing-order">
-                                <option value="0">昇順</option>
-                                <option value="1">降順</option>
+                                <option value="1">昇順</option>
+                                <option value="-1">降順</option>
+                            </select>
+                        </span>
+                        <span>
+                            <label for="order-priority">優先項目</label>
+                            <select id="order-priority">
+                                <option value="_id">登録順</option>
+                                <option value="vote">VOTE順</option>
                             </select>
                         </span>
                     </div>
                     <div id="searched-thumbnails">
+                    </div>
+                    <div id="listing-pagination">
+                        <span id="prevPage" class="box">&lt;</span>
+                        <span id="nextPage" class="box">&gt;</span>
                     </div>
                 </div>
                 <div class="tag-editor">
                     test
                 </div>
             </section>
-            <footer id="search-footer">
-                test
-            </footer>
         </div>
         <input type="radio" name="tab-item" id="tab-picture" >
         <label class="tab-class" for="tab-picture">閲覧</label>
@@ -80,6 +88,9 @@
             <p>タブ4のコンテンツを表示します</p>
         </div>
     </div>
+    <footer id="search-footer">
+        test
+    </footer>
     <script src="../renderer/import.js"></script>
     <script src="../renderer/search.js"></script>
 </body>
