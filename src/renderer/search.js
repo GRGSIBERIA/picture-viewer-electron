@@ -82,9 +82,26 @@ function queryBuilder() {
     return query;
 }
 
+async function buildQueryAsFindPictures() {
+    const query = queryBuilder();
+    await window.myapi.find(query);
+}
+
 document.getElementById("search-keyword").addEventListener('keypress', async (event) => {
     if (event.key === 'Enter') {
-        const query = queryBuilder();
-        await window.myapi.find(query);
+        await buildQueryAsFindPictures();
     }
 });
+
+document.getElementById("numof-listings").addEventListener('change', async (event) => {
+    await buildQueryAsFindPictures();
+});
+
+document.getElementById("listing-order").addEventListener('change', async (event) => {
+    await buildQueryAsFindPictures();
+});
+
+document.getElementById("order-priority").addEventListener('change', async (event) => {
+    await buildQueryAsFindPictures();
+});
+ 
